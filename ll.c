@@ -20,7 +20,6 @@ int main( void ) {
             printf( "The list is:\n" );
             printList( startPtr );
             break;
-
          case 2:
             if ( !isEmpty( startPtr ) ) { 
                scanf( "%d", &id );
@@ -29,26 +28,27 @@ int main( void ) {
                   printf( "The list is:\n" );
                   printList( startPtr );
                } else {
-                  printf( "ID %d not found.\n\n", id );
+                  printf( "ID %d not found.\n", id );
                }
             } else {
                scanf( "%d", &id );
-               printf( "List is empty.\n\n" );
+               printf( "List is empty.\n" );
             }
             break;
-
          default:
-            printf( "Invalid choice.\n\n" );
+            printf( "Invalid choice.\n" );
             instructions();
             break;
       }
       printf( "? " );
    }
 
-   while ( startPtr != NULL ) {
-      LLPtr tempPtr = startPtr;
-      startPtr = startPtr->nextPtr;
-      free( tempPtr );
+   if ( !isEmpty( startPtr ) ) {
+      while ( startPtr != NULL ) {
+         LLPtr tempPtr = startPtr;
+         startPtr = startPtr->nextPtr;
+         free( tempPtr );
+      }
    }
 
    printf( "End of run.\n" );

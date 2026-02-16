@@ -35,15 +35,12 @@ void insert( LLPtr *sPtr, int id, char name[] ) {
       strcpy(newPtr->name, name);
       newPtr->nextPtr = NULL;
       newPtr->prevPtr = NULL;
-
       LLPtr previousPtr = NULL;
       LLPtr currentPtr = *sPtr;
-
       while ( currentPtr != NULL && id > currentPtr->id ) {
          previousPtr = currentPtr;
          currentPtr = currentPtr->nextPtr;
       }
-
       if ( previousPtr == NULL ) { 
          newPtr->nextPtr = *sPtr;
          if (*sPtr != NULL) (*sPtr)->prevPtr = newPtr;
@@ -85,20 +82,18 @@ int isEmpty( LLPtr sPtr ) {
 
 void printList( LLPtr currentPtr ) {
    if ( isEmpty( currentPtr ) ) {
-      printf( "List is empty.\n\n" );
+      printf( "List is empty.\n" );
    } else {
       LLPtr temp = currentPtr;
       LLPtr lastPtr = NULL;
-
       while ( temp != NULL ) {
-         printf( "%d %s --> ", temp->id, temp->name );
+         printf( "%d %s -->", temp->id, temp->name );
          if (temp->nextPtr == NULL) lastPtr = temp;
          temp = temp->nextPtr;
       }
       printf( "NULL\n" );
-
       while ( lastPtr != NULL ) {
-         printf( "%d %s --> ", lastPtr->id, lastPtr->name );
+         printf( "%d %s -->", lastPtr->id, lastPtr->name );
          lastPtr = lastPtr->prevPtr;
       }
       printf( "NULL\n" );
