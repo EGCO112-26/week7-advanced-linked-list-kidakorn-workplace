@@ -106,7 +106,7 @@ void printList( LLPtr currentPtr ) {
       puts( "List is empty.\n" );
    } else {
       LLPtr lastPtr = NULL;
-      puts( "The list (Forward):" );
+      puts( "The list is:" );
       while ( currentPtr != NULL ) {
          printf( "%d:%s --> ", currentPtr->id, currentPtr->name );
          if (currentPtr->nextPtr == NULL) lastPtr = currentPtr; 
@@ -115,7 +115,7 @@ void printList( LLPtr currentPtr ) {
       puts( "NULL" );
 
       
-      puts( "The list (Backward):" );
+      
       while ( lastPtr != NULL ) {
          printf( "%d:%s --> ", lastPtr->id, lastPtr->name );
          lastPtr = lastPtr->prevPtr;
