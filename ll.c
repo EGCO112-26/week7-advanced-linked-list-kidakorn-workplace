@@ -1,65 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ll.h" 
+#include "ll.h"
 
-int main( void )
-{ 
-   LLPtr startPtr = NULL; 
-   unsigned int choice; 
-   int id; 
+int main( void ) { 
+   LLPtr startPtr = NULL;
+   unsigned int choice;
+   int id;
    char name[50];
 
-   instructions(); 
-   printf( "%s", "? " );
+   instructions();
+   printf( "? " );
    
-   while ( scanf("%u", &choice) != EOF && choice != 3 ) { 
-
+   while ( scanf( "%u", &choice ) == 1 && choice != 3 ) { 
       switch ( choice ) { 
          case 1:
-            
-            if (scanf("%d %s", &id, name) == 2) {
-               insert( &startPtr, id, name );
-               printList( startPtr );
-            }
+            scanf( "%d %s", &id, name );
+            insert( &startPtr, id, name );
+            printf( "The list is:\n" );
+            printList( startPtr );
             break;
 
          case 2:
             if ( !isEmpty( startPtr ) ) { 
-               if (scanf("%d", &id) == 1) {
-                  if ( deletes( &startPtr, id ) != -1 ) { 
-                     printf( "ID %d deleted.\n", id );
-                     printList( startPtr );
-                  } 
-                  else {
-                     printf( "ID %d not found.\n\n", id );
-                  }
+               scanf( "%d", &id );
+               if ( deletes( &startPtr, id ) != -1 ) { 
+                  printf( "ID %d deleted.\n", id );
+                  printf( "The list is:\n" );
+                  printList( startPtr );
+               } else {
+                  printf( "ID %d not found.\n\n", id );
                }
-            } 
-            else {
-             
-               scanf("%d", &id); 
-               puts( "List is empty.\n" );
-            } 
+            } else {
+               scanf( "%d", &id );
+               printf( "List is empty.\n\n" );
+            }
             break;
 
          default:
-            puts( "Invalid choice.\n" );
+            printf( "Invalid choice.\n\n" );
             instructions();
             break;
-      } 
-
-      printf( "%s", "? " );
-   } 
-
-   if ( !isEmpty( startPtr ) ) {
-       while ( startPtr != NULL ) {
-           LLPtr tempPtr = startPtr;
-           startPtr = startPtr->nextPtr;
-           free( tempPtr );
-       }
+      }
+      printf( "? " );
    }
 
-   puts( "End of run." );
+   while ( startPtr != NULL ) {
+      LLPtr tempPtr = startPtr;
+      startPtr = startPtr->nextPtr;
+      free( tempPtr );
+   }
+
+   printf( "End of run.\n" );
    return 0;
 }

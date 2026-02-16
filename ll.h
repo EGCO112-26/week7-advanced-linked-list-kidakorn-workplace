@@ -5,18 +5,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 struct Node {
-   int id;              // 
-   char name[50];       // 
-   struct Node *nextPtr; 
-   struct Node *prevPtr; 
-}; 
+   int id;
+   char name[50];
+   struct Node *nextPtr;
+   struct Node *prevPtr;
+};
 
 typedef struct Node LLnode;
 typedef LLnode *LLPtr;
 
-// Prototypes
 void insert( LLPtr *sPtr, int id, char name[] );
 int deletes( LLPtr *sPtr, int id );
 int isEmpty( LLPtr sPtr );
@@ -24,15 +22,14 @@ void printList( LLPtr currentPtr );
 void instructions( void );
 
 void instructions( void ) {
-   puts( "Enter your choice:\n"
-      "   1 to insert an element into the list.\n"
-      "   2 to delete an element from the list.\n"
-      "   3 to end." );
+   printf( "Enter your choice:\n"
+           "   1 to insert an element into the list.\n"
+           "   2 to delete an element from the list.\n"
+           "   3 to end.\n" );
 }
 
 void insert( LLPtr *sPtr, int id, char name[] ) {
    LLPtr newPtr = (LLPtr) malloc( sizeof( LLnode ) );
-
    if ( newPtr != NULL ) {
       newPtr->id = id;
       strcpy(newPtr->name, name);
@@ -49,52 +46,37 @@ void insert( LLPtr *sPtr, int id, char name[] ) {
 
       if ( previousPtr == NULL ) { 
          newPtr->nextPtr = *sPtr;
-         if (*sPtr != NULL) {
-             (*sPtr)->prevPtr = newPtr; // 
-         }
+         if (*sPtr != NULL) (*sPtr)->prevPtr = newPtr;
          *sPtr = newPtr;
-      } 
-      else { 
+      } else { 
          previousPtr->nextPtr = newPtr;
          newPtr->prevPtr = previousPtr;
          newPtr->nextPtr = currentPtr;
-         
-         if (currentPtr != NULL) {
-             currentPtr->prevPtr = newPtr; 
-         }
+         if (currentPtr != NULL) currentPtr->prevPtr = newPtr;
       }
-   } else {
-      printf( "ID %d not inserted. No memory available.\n", id );
    }
 }
 
 int deletes( LLPtr *sPtr, int id ) {
    LLPtr currentPtr = *sPtr;
-
    while ( currentPtr != NULL && currentPtr->id != id ) {
       currentPtr = currentPtr->nextPtr;
    }
-
    if ( currentPtr != NULL ) {
       LLPtr tempPtr = currentPtr;
-
       if ( currentPtr->prevPtr == NULL ) { 
          *sPtr = currentPtr->nextPtr;
-         if (*sPtr != NULL) {
-             (*sPtr)->prevPtr = NULL;
-         }
+         if (*sPtr != NULL) (*sPtr)->prevPtr = NULL;
       } else { 
          currentPtr->prevPtr->nextPtr = currentPtr->nextPtr;
          if (currentPtr->nextPtr != NULL) {
-             currentPtr->nextPtr->prevPtr = currentPtr->prevPtr;
+            currentPtr->nextPtr->prevPtr = currentPtr->prevPtr;
          }
       }
-      
       free( tempPtr );
       return id;
    }
-
-   return -1; 
+   return -1;
 }
 
 int isEmpty( LLPtr sPtr ) {
@@ -103,25 +85,23 @@ int isEmpty( LLPtr sPtr ) {
 
 void printList( LLPtr currentPtr ) {
    if ( isEmpty( currentPtr ) ) {
-      puts( "List is empty.\n" );
+      printf( "List is empty.\n\n" );
    } else {
-      LLPtr lastPtr =NULL;
-      puts( "The list is:" );
-      while ( currentPtr !=NULL ) {
-         printf( "%d %s --> ", currentPtr->id, currentPtr->name );
-         if (currentPtr->nextPtr == NULL) lastPtr = currentPtr; 
-         currentPtr = currentPtr->nextPtr;
-      }
-      puts( "NULL" );
+      LLPtr temp = currentPtr;
+      LLPtr lastPtr = NULL;
 
-      
-      
+      while ( temp != NULL ) {
+         printf( "%d %s --> ", temp->id, temp->name );
+         if (temp->nextPtr == NULL) lastPtr = temp;
+         temp = temp->nextPtr;
+      }
+      printf( "NULL\n" );
+
       while ( lastPtr != NULL ) {
          printf( "%d %s --> ", lastPtr->id, lastPtr->name );
          lastPtr = lastPtr->prevPtr;
       }
-      puts( "NULL\n" );
+      printf( "NULL\n\n" );
    }
 }
-
 #endif
