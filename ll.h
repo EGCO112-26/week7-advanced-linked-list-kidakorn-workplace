@@ -101,7 +101,7 @@ void printList( LLPtr currentPtr ) {
          printf( "%d %s --> ", lastPtr->id, lastPtr->name );
          lastPtr = lastPtr->prevPtr;
       }
-      printf( "NULL\n\n" );
+      printf( "NULL\n" );
    }
 }
 #endif
