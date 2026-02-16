@@ -14,6 +14,8 @@ int main( void )
    scanf( "%u", &choice );
 
    // loop while user does not choose 3
+
+
    while ( choice != 3 ) { 
 
       switch ( choice ) { 
