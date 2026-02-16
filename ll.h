@@ -105,9 +105,9 @@ void printList( LLPtr currentPtr ) {
    if ( isEmpty( currentPtr ) ) {
       puts( "List is empty.\n" );
    } else {
-      LLPtr lastPtr = NULL;
+      LLPtr lastPtr =NULL;
       puts( "The list is:" );
-      while ( currentPtr != NULL ) {
+      while ( currentPtr !=NULL ) {
          printf( "%d %s --> ", currentPtr->id, currentPtr->name );
          if (currentPtr->nextPtr == NULL) lastPtr = currentPtr; 
          currentPtr = currentPtr->nextPtr;
